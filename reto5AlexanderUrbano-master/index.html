@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reto 5</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container" id="app">
+        <div class="container">
+            <h1>Facturación Fast Food </h1>
+            <h3>Seleccione o agregue un cliente</h3>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                        data-target="#modalCustomer">
+                        Agregar Cliente
+                    </button>
+                </div>
+                <select v-model="facturacion.customerSelcted.numberId" class="custom-select custom-select-lg"
+                    @change="infocustomerSelected">
+                    <option value="">-- Seleccionar --</option>
+                    <option v-for="customer in customers" :value="customer.numberId">
+                        {{customer.nameCustomer}} {{customer.lastNameCustomer}}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <detail-customer v-if="facturacion.customerSelcted.numberId" :customer="facturacion.customerSelcted">
+                </detail-customer>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                        data-target="#modalProduct">
+                        Agregar Producto
+                    </button>
+                </div>
+                <select class=" form-control custom-select custom-select-lg "
+                    v-model="facturacion.productSelected.idProd" @change="infoproductSelected">
+                    <option value="">-- Seleccionar --</option>
+                    <option v-for="product in products" :value="product.idProd">
+                        {{ product.nameProd }}
+                    </option>
+                </select>
+            </div>
+            <div class="panel panel-default" v-show="facturacion.productSelected.idProd != ''">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Información del producto seleccionado</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <img :src="'http://lorempixel.com/90/90/food/' + facturacion.productSelected.idProd"
+                                class="img-responsive img-rounded" text-align="left">
+                        </div>
+                        <div class="col-sm-10">
+                            <p>
+                                <strong>Código: </strong> {{ facturacion.productSelected.idProd || '' }}
+                            </p>
+                            <p>
+                                <strong>Producto: </strong> {{ facturacion.productSelected.nameProd || '' }}
+                            </p>
+                            <p>
+                                <strong>Precio: </strong> {{ facturacion.productSelected.priceProd || '' }}
+                                <strong> IVA: </strong> {{ facturacion.productSelected.tax || '' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label for="" class="control-label">Cantidad:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="number" min="1" v-model="facturacion.productSelected.cantidad"
+                                class="form-control col-sm-6 input-sm" required>
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            <button class="btn btn-primary" @click="addProduct">Agregar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <hr>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>IVA</th>
+                            <th>Subtotal</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-show="!facturacion.productsAdd.length">
+                            <td colspan="6">
+                                <p class="text-center">
+                                    <em>
+                                        No se han agregado productos a la factura actual
+                                    </em>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr v-for="(linea, indice) in facturacion.productsAdd">
+                            <td>{{ linea.idProd }}</td>
+                            <td>{{ linea.nameProd }}</td>
+                            <td>{{ linea.priceProd }}</td>
+                            <td width="100">
+                                <input type="number" min="1" class="form-control input-sm" v-model="linea.cantidad">
+                            </td>
+                            <td>{{ linea.tax}}%</td>
+                            <td>{{linea.cantidad * linea.priceProd * ((linea.tax/100)+1)}}</td>
+                            <td class="text-right">
+                                <button class="btn btn-xs btn-danger" title="Eliminar línea"
+                                    @click="eliminarLinea(indice)">&times;</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-left">
+                                <strong>Total de la compra:</strong>
+                            </td>
+                            <td>
+                                <strong>{{ totalLineas }}</strong>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <button class="btn btn-success" @click="saveInvoice" style="float:left">Guardar</button>
+                <h2> &nbsp Factura #{{idInvoice}}</h2>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalCustomer" tabindex="-1" role="dialog" aria-labelledby="modalClientLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalClientLabel">Registra un nuevo cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Nombre: <input type="text" v-model="nameCustomer"></label>
+                        <label>Apellido: <input type="text" v-model="lastNameCustomer"></label>
+                        <label>Email: <input type="email" v-model="emailCustomer"></label>
+                        <label>Tipo documento: <input type="text" v-model="typeId"></label>
+                        <label>Número documento: <input type="number" v-model="numberId"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                        <button type="button" class="btn btn-primary"
+                            @click="addCustomer(typeId , numberId, nameCustomer, lastNameCustomer, emailCustomer)"
+                            data-dismiss="modal">GUARDAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalProduct" tabindex="-1" role="dialog" aria-labelledby="modalClientLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalClientLabel">Elige un producto o registralo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Nombre: <input type="text" v-model="nameProd"></label>
+                        <label>Precio: <input type="number" v-model="priceProd"></label>
+                        <label>IVA: <input type="number" v-model="tax"></label>
+                        <label>Codigo: <input type="number" v-model="idProd"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                        <button type="button" class="btn btn-primary" @click="addProd(idProd, nameProd, priceProd, tax)"
+                            data-dismiss="modal">GUARDAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+    <script src="https://unpkg.com/vue@2.4.2"></script>
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

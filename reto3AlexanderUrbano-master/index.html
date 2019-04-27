@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./app.js"></script>
+    <title>Reto 3</title>
+</head>
+
+<body onload="navBar(1)">
+    <nav class="navbar navbar-inverse">
+        <section class="container-fluid">
+            <section class="navbar-header">
+                <a class="navbar-brand" onclick="navBar(1)" href="#1">BOOTCAMP</a>
+            </section>
+            <ul class="nav navbar-nav">
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">EJERCICIOS<span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li onclick="navBar(1)"> <a href="#1">Ejercicio 1</a></li>
+                        <li onclick="navBar(2)"><a href="#2">Ejercicio 2</a></li>
+                        <li onclick="navBar(3)"><a href="#3">Ejercicio 3</a></li>
+                        <li onclick="navBar(4)"><a href="#4">Ejercicio 4</a></li>
+                        <li onclick="navBar(5)"><a href="#5">Ejercicio 5</a></li>
+                        <li onclick="navBar(6)"><a href="#6">Ejercicio 6</a></li>
+                        <li onclick="navBar(7)"><a href="#7">Ejercicio 7</a></li>
+                        <li onclick="navBar(8)"><a href="#8">Ejercicio 8</a></li>
+                        <li onclick="navBar(9)"><a href="#9">Ejercicio 9</a></li>
+                        <li onclick="navBar(10)"><a href="#10">Ejercicio 10</a></li>
+                        <li onclick="navBar(11)"><a href="#11">Ejercicio 11</a></li>
+                        <li onclick="navBar(12)"><a href="#12">Ejercicio 12</a></li>
+                        <li onclick="navBar(13)"><a href="#13">Ejercicio 13</a></li>
+                        <li onclick="navBar(14)"><a href="#14">Ejercicio 14</a></li>
+                        <li onclick="navBar(15)"><a href="#15">Ejercicio 15</a></li>
+                        <li onclick="navBar(16)"><a href="#16">Ejercicio 16</a></li>
+                        <li onclick="navBar(17)"><a href="#17">Ejercicio 17</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </nav>
+    <div id="1">
+        <h2><strong>CALCULAR SALARIO </strong></h2>
+        <p>Ingrese el salario del empleado, y lo aumenta según su cargo como se muestra en la siguiente tabla.</p>
+        <table class="table">
+            <tr>
+                <th>Contrato en dólares</th>
+                <th>Aumento %</th>
+            </tr>
+            <tr>
+                <td>0 a 9000</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>9001 a 15000</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>15001 a 20000</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>más de 20000</td>
+                <td>0</td>
+            </tr>
+        </table>
+        <label>Ingrese el salario: </label>
+        <input type="text" id="txtSal">
+        <button onclick="salario()">Calcular</button>
+        <h2 id="pSal"></h2>
+    </div>
+    <div id="2">
+        <h2><strong>CALCULAR VALOR DE PI </strong></h2>
+        <p>PI=3.1415621654</p>
+        <input type="text" id="txtCalcPi">
+        <button onclick="calcPi()">Calcular</button>
+        <p id="pPi"></p>
+    </div>
+    <div id="3">
+        <h2><strong>CALCULAR MAYOR, MENOR Y MEDIA DE n NÚMEROS </strong></h2>
+        <p>Se debe de ingresar la cantidad de números a usar y el valor de dichos números</p>
+        <label id="lbl">Ingrese la cantidad de números: </label>
+        <input type="text" id="txtN" placeholder="5">
+        <label id="lblValNum"></label>
+        <button onclick="calcNumeros(txtN.value, 'pCalcNumeros')">Calcular</button>
+        <p id="pCalcNumeros"></p>
+    </div>
+    <div id="4">
+        <h2><strong> DOMINGO DE PASCUA </strong></h2>
+        <p>Ingresa un año entre 1990 y 2000 para verificar en que dia fue domingo de pascua</p>
+        <input type="text" id="txtDomPas">
+        <button onclick="calcDomPas()">Calcular</button>
+        <p id="pDomPas"></p>
+    </div>
+    <div id="5">
+        <h2><strong> AÑOS BISIESTOS </strong></h2>
+        <input type="text" id="txtAñoB">
+        <button onclick="añoBi(txtAñoB.value)">CALCULAR</button>
+        <p id="restAñoB"></p>
+    </div>
+    <div id="6">
+        <h2><strong>CUADRADO MÁGICO </strong></h2>
+        <p>Ingrese un número impar entre 3 y 11 </p>
+        <input type="text" id="txtCuadMag">
+        <button onclick="calcCuadMag()">GENERAR CUADRADO</button>
+        <p id="pCuadMag" class="table table-responsive table-hover">
+        </p>
+    </div>
+    <div id="7">
+        <h2><strong> NÚMERO PERFECTO </strong></h2>
+        <p>Calcula los primeros 3 números perfectos.</p>
+        <button onclick="numPerfecto(500)">CALCULAR</button>
+        <p id="pNumPerfecto"></p>
+    </div>
+    <div id="8">
+        <h2><strong> CALCULAR VALOR DE e^x</strong></h2>
+        <p>Ingresa el valor de la variable x para calcular los 100 primeros valores de e^x</p>
+        <input type="text" id="txte">
+        <button onclick="ex()">CALCULAR</button>
+        <p id="pe"></p>
+    </div>
+    <div id="9">
+        <h2><strong> PROBLEMAS DE LOS CONEJOS </strong></h2>
+        <p>EL problema de los conejos.</p>
+        <input type="text" id="txtConejo">
+        <button onclick="conejo()">CONEJOS</button>
+        <p id="pConejo"></p>
+    </div>
+    <div id="10">
+        <h2><strong> MÍNIMO COMÚN DIVISOR </strong></h2>
+        <p>Calcula el MCD entre dos números</p>
+        <label>ingrese un valor entero:</label>
+        <input type="text" id="txtMcd1">
+        <label>ingrese un valor entero:</label>
+        <input type="text" id="txtMcd2">
+        <button onclick="mcd()">CALCULAR</button>
+        <p id="pMcd"></p>
+    </div>
+    <div id="11">
+        <h2><strong> NÚMERO PRIMO</strong></h2>
+        <p>Ingresar un número por teclado y verificar si es primo</p>
+        <input type="text" id="txtPrimo">
+        <button onclick="primo()">CALCULAR</button>
+        <p id="pPrimo"></p>
+    </div>
+    <div id="12">
+        <h2><strong> CALCULAR LA SUCESIÓN </strong></h2>
+        <p>Calcula la sucesión de 1/1, 1/2, ..., 1/n</p>
+        <label>Ingrese un número positivo</label>
+        <input type="text" id="txtSuce">
+        <button onclick="sucesion()">CALCULAR</button>
+        <p id="pSuce"></p>
+    </div>
+    <div id="13">
+        <h2><strong> CALCULAR LA SERIE </strong></h2>
+        <p>Calcula la serie de 1/2, 2/2^2, ..., n/2^n</p>
+        <label>Ingrese un número positivo</label>
+        <input type="text" id="txtSerie">
+        <button onclick="serie()">CALCULAR</button>
+        <p id="pSerie"></p>
+    </div>
+    <div id="14">
+        <h2><strong> PIRÁMIDE DE ESTRELLAS </strong></h2>
+        <input type="text" id="txtPiramide">
+        <button onclick="piramide()">GENERAR PIRÁMIDE</button>
+        <p id="pPiramide" class="start"></p>
+    </div>
+    <div id="15">
+        <h2><strong> NÚMEROS PERFECTO HASTA n </strong></h2>
+        <p>Ingresar un número y encontrar los números perfectos hasta dicho número</p>
+        <input type="text" id="txtPerfectoN">
+        <button onclick="perfectoN()">CALCULAR</button>
+        <p id="pPerfectoN"></p>
+    </div>
+    <div id="16">
+        <h2><strong> ENCONTRAR NÚMERO NATURAL MAS PEQUEÑO</strong></h2>
+        <p>Ingresa un número y calcular la suma de los primeros números hasta que la suma exceda al ingresado</p>
+        <input type="text" id="txtPeque">
+        <button onclick="peque()">CALCULAR</button>
+        <p id="pPeque"></p>
+    </div>
+    <div id="17">
+        <h2><strong>CALCULAR MAYOR, MENOR Y MEDIA DE n NÚMEROS </strong></h2>
+        <p>Se debe de ingresar la cantidad de números a usar y el valor de dichos números</p>
+        <label id="lbl">Ingrese la cantidad de números: </label>
+        <input type="text" id="txtNn" placeholder="5">
+        <label id="lblValNum"></label>
+        <button onclick="calcNumeros(txtNn.value,'pCalcNumero')">Calcular</button>
+        <p id="pCalcNumero"></p>
+    </div>
+ </body>
+
+</html>

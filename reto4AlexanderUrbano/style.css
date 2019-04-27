@@ -1,0 +1,65 @@
+body{
+    background-color: rgb(235, 236, 236);
+}
+
+.buttonArticle{
+    border: 0;
+    background-color: rgb(235, 236, 236);
+}
+
+.buttonArticle:hover{
+    background-color: rgb(98, 117, 117);
+    color: white;
+    zoom: 110%;
+    width: 110% ;    
+}
+
+input {
+    width: 45%;
+    min-width: 60px;
+    padding: 5px;
+    color: rgb(54, 51, 51);
+}
+
+h1 {
+    margin: 0;
+    padding: 10px 0;
+    color: rgb(49, 49, 49);
+    text-shadow: 3px 3px 1px rgb(201, 184, 184);
+}
+
+label {
+    padding: 0.1rem;
+    font-size: 1.3rem;
+}
+
+.buttonSearch {
+    width: 25%;
+    min-width: 100px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    background-color: #40a1d1;
+    border-radius: 10px;
+    border: 1px solid #0016b0;
+}
+
+.buttonSearch:hover {
+    color: #40a1d1;
+    background-color: rgb(0, 38, 63);
+}
+.divFix{
+    position: fixed;
+    left: 1rem;
+    bottom: 20rem;
+    width: 10%;
+}
+
+.divFix>button{
+    border: 0;
+    padding: 0;
+}
+.divFix>button>img{
+    width: 100%;
+}

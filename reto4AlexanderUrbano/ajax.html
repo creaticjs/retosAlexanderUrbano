@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MOVIES</title>
+</head>
+
+<body onload="getData(renderData)">
+    <h1>THE BEST MOVIES</h1>
+    <button></button>
+    <h1 id="name"></h1>
+    <h3 id="bio"></h3>
+    <img src="" alt="" id="avatar">
+    <script>
+        function getData(callback) {
+            var url="";
+            var apikey="dfa58e29";
+            url="http://www.omdbapi.com/?i=tt3896198&apikey=dfa58e29";
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    callback(JSON.parse(this.responseText));
+                }
+            };
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
+
+        function renderData(data) {
+            document.getElementById("name").innerHTML = data.Title;
+            document.getElementById("bio").innerHTML = data.Year;
+            document.getElementById("avatar").innerHTML = data.Director;
+        }
+
+    </script>
+<!--http://www.omdbapi.com/?i=tt3896198&apikey=dfa58e29-->
+</body>
+
+</html>

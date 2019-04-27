@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Reto 4</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Noticias del mundo</h1>
+        <br>
+        <div id="search">
+            <input type="text" v-model="txtTitle" placeholder="Escribe para buscar una noticia">
+            <button @click="getData()" class="buttonSearch">Buscar</button>
+            <button @click="getAllNew()" class="buttonSearch">Ultimas Noticias</button>
+        </div>
+        <br>
+
+        <div id="article" class="row">
+            <div v-for="article in newArticle" class="col-sm-4">
+                <button class="buttonArticle" @click="getArticle(article.url)">
+                    <img :src="article.urlToImage" width="100%" height='180rem'>
+                    <h5>{{article.title}}</h5>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="divFix">
+        <button><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/COLOMBIA_BANDERA.jpg" alt=""></button>
+        <button><img src="https://lahora.com.ec/contenido/cache/36/dia-de-la-bandera-imagen-1-_20170925072514-682x512.jpg" alt=""></button>
+        <button><img src="https://ichef.bbci.co.uk/news/660/cpsprodpb/D348/production/_95588045_178392703.jpg" alt=""></button>
+        <button><img src="https://st2.depositphotos.com/1985283/10651/v/600/depositphotos_106519144-stock-video-seamless-usa-flag-waving-in.jpg" alt=""></button>
+        <button><img src="https://www.mexicodesconocido.com.mx/wp-content/uploads/2018/01/bandera_de_mexico.jpg" alt=""></button>
+    </div>
+
+    <!--div id="peli"></div-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./main.js"></script>
+
+    <!--http://www.omdbapi.com/?i=tt3896198&apikey=dfa58e29-->
+</body>
+
+</html>
