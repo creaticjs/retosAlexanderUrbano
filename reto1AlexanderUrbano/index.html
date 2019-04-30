@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="calc.js" language="javascript" type="text/javascript"></script>
+    <title>BootCamp</title>
+</head>
+
+<body>
+    <form id="calculadora">
+        <h3>Calculadora</h3>
+        <input type="textfield" value="0" id="valNum" readonly="true">
+        <br>
+        <input type="button" value="1" onClick="obtenerNum('1')">
+        <input type="button" value="2" onClick="obtenerNum('2')">
+        <input type="button" value="3" onClick="obtenerNum('3')">
+        <input type="button" value="+" id="sumar" onClick="operar(1)">
+        <br>
+        <input type="button" value="4" onClick="obtenerNum('4')">
+        <input type="button" value="5" onClick="obtenerNum('5')">
+        <input type="button" value="6" onClick="obtenerNum('6')">
+        <input type="button" value="-" id="restar" onClick="operar(2)">
+        <br>
+        <input type="button" value="7" onClick="obtenerNum('7')">
+        <input type="button" value="8" onClick="obtenerNum('8')">
+        <input type="button" value="9" onClick="obtenerNum('9')">
+        <input type="button" value="*" id="multiplicar" onClick="operar(3)">
+        <br>
+        <input type="button" value="0" onClick="obtenerNum('0')">
+        <input type="button" value="C" id="C" onClick="clean()">
+        <input type="button" value="/" id="dividir" onClick="operar(4)">
+        <input type="button" value="=" id="igual" onClick="result()">
+    </form>
+</body>
+
+</html>
